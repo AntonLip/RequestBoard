@@ -10,7 +10,7 @@ namespace RequestBoard.DataAccess
         public AppDbContext(DbContextOptions<AppDbContext> options)
                 : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         public DbSet<RequestType> RequestTypes { get; set; }
         public DbSet<RequestToRestore> RequestToRestores{ get; set; }
