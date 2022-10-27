@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using RequestBoard.Models;
+using RequestBoard.Models.DbModels;
 using RequestBoard.Models.Interfaces.IRepository;
 
 namespace RequestBoard.Controllers;
@@ -33,12 +34,54 @@ public class HomeController : Controller
             return NotFound();
         }
     }
-    public IActionResult Privacy()
+    public IActionResult RequestList()
+    {
+        try
+        {
+            var models = _businnesLayer.GetAllRequestToRestore();
+            return View(models);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return NotFound();
+        }
+    }
+    [HttpGet]
+    public IActionResult CreateRequestType()
     {
         return View();
-
+    }
+    [HttpPost]
+    public IActionResult CreateRequestType(RequestType model)
+    {
+        try
+        {
+            var item = _businnesLayer.AddRequestType(model);
+            return item is null ? BadRequest() : RedirectToAction("RequestTypeList");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return NotFound();
+        }
     }
 
+
+
+    public IActionResult RemoveRequestType(Guid id)
+    {
+        try
+        {
+            var item = _businnesLayer.RemoveRequestType(id);
+            return item is null ? BadRequest() : RedirectToAction("RequestTypeList");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return NotFound();
+        }
+    }
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

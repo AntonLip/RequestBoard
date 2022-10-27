@@ -55,7 +55,7 @@ namespace RequestBoard.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Register(RegisterViewModel registerViweModel)
+        public async Task<IActionResult> Register(RegisterViweModel registerViweModel)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +70,7 @@ namespace RequestBoard.Controllers
                 if (result.Result.Succeeded)
                 {
                     
-                    return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("Index", "Home");
                 }
                 foreach (var er in result.Result.Errors)
                 {

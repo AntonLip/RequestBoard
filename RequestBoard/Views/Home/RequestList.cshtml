@@ -1,0 +1,46 @@
+@model List<RequestDto>
+
+@{
+    ViewData["Title"] = "СПИСОК ЗАПРОСОВ";
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название
+                </th>
+                <th>
+                    Тип
+                </th>
+                <th>
+                    Описание
+                </th>
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.RequestTypeName
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Удалить", "DeleteUser", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

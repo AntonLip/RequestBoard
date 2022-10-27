@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RequestBoard.Models.ViewModels.Account
 {
-    public class RegisterViewModel
+    public class RegisterViweModel
     {
         [Required]
         [EmailAddress]
