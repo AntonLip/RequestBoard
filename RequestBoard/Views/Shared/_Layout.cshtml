@@ -16,10 +16,10 @@
     <nav class="py-2 bg-light border-bottom">
         <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
-                <li class="nav-item"><a asp-action="RequestList" asp-controller="Home" class="nav-link link-dark px-2">Заявки</a></li>
+                
                 @if (signInManager.IsSignedIn(User))
                 {
-                    
+                    <li class="nav-item"><a asp-action="RequestList" asp-controller="Home" class="nav-link link-dark px-2">Заявки</a></li>
                     if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item"><a asp-action="RequestTypeList" asp-controller="Home" class="nav-link link-dark px-2">Типы заявок</a></li>
@@ -52,8 +52,8 @@
                 </svg>
                 <span class="fs-4">Техническая поддержка</span>
             </a>
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0">
-                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0" asp-controller="Home" asp-action="Find">
+                <input type="search" class="form-control" name="searchString" placeholder="Поиск..." aria-label="Search">
             </form>
         </div>
     </header>
@@ -67,7 +67,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - Техническая поддержка пользувателей
+            &copy; 2022 - Техническая поддержка пользователей
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

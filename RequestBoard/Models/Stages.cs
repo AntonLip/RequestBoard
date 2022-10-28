@@ -3,7 +3,7 @@ namespace RequestBoard.Models
     public enum Stages
     {
         Принято,
-        Обрабатывается,
+        Отменено,
         Выполнено
     }
 }

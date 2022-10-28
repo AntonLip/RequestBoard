@@ -9,7 +9,11 @@ namespace RequestBoard.Models.ViewModels.Account
         [EmailAddress]
         [Remote(action: "EmailInUse", controller: "Account")]
         public string Email { get; set; }
+        [Required]
+        [Display(Name = "Имя")]
         public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Фамилия")]
         public string LastName { get; set; }
         public string UserName { get; set; }
         [Required]

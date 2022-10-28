@@ -28,6 +28,24 @@ namespace RequestBoard.BusinessLayer
             return model;
         }
 
+        public List<RequestDto> FindRequestByName(string name)
+        {
+            var items = _requestToRestoreRepository.FindRequestByPartOfName(name);
+            return items is null ? throw new ArgumentException(nameof(items)) : _mapper.Map<List<RequestDto>>(items);
+
+        }
+
+        public RequestDto FullfillRequest(Guid requestId)
+        {
+            if(requestId == Guid.Empty)
+                throw new ArgumentException(nameof(requestId));
+            
+            var item = _requestToRestoreRepository.GetEntityById(requestId);
+            item.Stage = Models.Stages.Выполнено;
+            _requestToRestoreRepository.UpdateEntity(item);
+            return _mapper.Map<RequestDto>(item);
+        }
+
         public List<RequestDto> GetAllRequestToRestore()
         {
              var dbmodels = _requestToRestoreRepository.GetAllEntities();
@@ -48,6 +66,23 @@ namespace RequestBoard.BusinessLayer
         public RequestType GetByIdRequestType(Guid requestTypeId)
         {
             return _requestTypeRepository.GetEntityById(requestTypeId);
+        }
+
+        public List<RequestDto> GetRequestsByUserId(string userId)
+        {
+            var items = _requestToRestoreRepository.GetWithInclude(p => p.UserId == userId);
+            return items is null ? throw new ArgumentException(nameof(items)): _mapper.Map<List<RequestDto>>(items);
+        }
+
+        public RequestDto RejectRequest(Guid requestId)
+        {
+            if(requestId == Guid.Empty)
+                throw new ArgumentException(nameof(requestId));
+            
+            var item = _requestToRestoreRepository.GetEntityById(requestId);
+            item.Stage = Models.Stages.Отменено;
+            _requestToRestoreRepository.UpdateEntity(item);
+            return _mapper.Map<RequestDto>(item);
         }
 
         public RequestDto RemoveRequestToRestore(Guid requestId)

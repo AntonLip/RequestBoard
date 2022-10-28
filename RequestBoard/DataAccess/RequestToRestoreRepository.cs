@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RequestBoard.Models.DbModels;
 using RequestBoard.Models.Interfaces.IRepository;
 
@@ -9,6 +10,13 @@ namespace RequestBoard.DataAccess
             :base(context)
         {
             
+        }
+
+        public List<RequestToRestore> FindRequestByPartOfName(string name)
+        {
+            
+            var ret =  _dbSet.AsNoTracking().Where(p => EF.Functions.Like(p.Name, $"%{name}%")).ToList();
+            return ret;
         }
     }
 }

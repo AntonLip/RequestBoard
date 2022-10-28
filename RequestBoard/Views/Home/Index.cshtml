@@ -1,8 +1,22 @@
-﻿@{
+﻿@model ApplicationUser
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Добро пожаловать</h1>
+    <p>@Model.LastName @Model.FirstName</p>
+</div>
+<div>
+
+    <div class="card">
+        <img class="bd-placeholder-img card-img-top" src="~/pngtree.jpg" width="50%" height="50%">
+        <title>Placeholder</title></img>
+        <div class="card-body text-center">
+            <p class="card-text">Если у Вас возникли трудности при эксплуатации нашего сервиса нажмите на кнопку ниже</p>
+            <a asp-action="CreateRequest">Создать заявку</a>
+        </div>
+        
+    </div>
+
 </div>

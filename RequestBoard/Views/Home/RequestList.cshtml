@@ -1,8 +1,9 @@
 @model List<RequestDto>
-
+@inject SignInManager<ApplicationUser> signInManager;
 @{
     ViewData["Title"] = "СПИСОК ЗАПРОСОВ";
 }
+<a asp-action="CreateRequest">Добавить заявку</a>
 
 <div>
     <table class="table">
@@ -20,6 +21,7 @@
                 <th>
                     Состояние
                 </th>
+
                 <th></th>
             </tr>
         </thead>
@@ -35,14 +37,23 @@
                     </td>
                     <td>
                         @item.Description
-                    </td
+                    </td>
                     <td>
                         @item.Stage
-                    </td>>
-                    <td>
-                        @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Удалить", "DeleteUser", new { id = item.Id })
                     </td>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <td>
+                            @if(User.IsInRole("Admin"))
+                            {
+                                @Html.ActionLink("Выполнить", "FullfillRequest", new { id = item.Id })                               
+                            }
+                            
+                                @Html.ActionLink("  Отменить", "RejectRequest", new { id = item.Id })                            
+                            
+                            @Html.ActionLink("  Удалить", "DeleteRequest", new { id = item.Id })
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

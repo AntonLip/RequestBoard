@@ -23,7 +23,7 @@ namespace RequestBoard.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl)
         {
-            ApplicationUser user = null;
+            ApplicationUser? user;
             user = await _userManager.FindByEmailAsync(loginViewModel.Email);
             if (user is null)
                 user = await _userManager.FindByNameAsync(loginViewModel.Email);
@@ -46,9 +46,8 @@ namespace RequestBoard.Controllers
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid Log In Attempt");
-            }
-
-            return View(loginViewModel);
+                return View("LoginError");
+            }            
         }
         [HttpGet]
         public IActionResult Register()
