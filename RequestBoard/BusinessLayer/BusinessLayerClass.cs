@@ -30,7 +30,8 @@ namespace RequestBoard.BusinessLayer
 
         public List<RequestDto> GetAllRequestToRestore()
         {
-            return (List<RequestDto>)_requestToRestoreRepository.GetAllEntities();
+             var dbmodels = _requestToRestoreRepository.GetAllEntities();
+            return dbmodels is null ? throw new ArgumentException(nameof(dbmodels)) : _mapper.Map<List<RequestDto>>(dbmodels);
         }
 
         public List<RequestType> GetAllRequestType()

@@ -16,9 +16,10 @@
     <nav class="py-2 bg-light border-bottom">
         <div class="container d-flex flex-wrap">
             <ul class="nav me-auto">
+                <li class="nav-item"><a asp-action="RequestList" asp-controller="Home" class="nav-link link-dark px-2">Заявки</a></li>
                 @if (signInManager.IsSignedIn(User))
                 {
-                    <li class="nav-item"><a asp-action="RequestTypeList" asp-controller="Home" class="nav-link link-dark px-2">Заявки</a></li>
+                    
                     if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item"><a asp-action="RequestTypeList" asp-controller="Home" class="nav-link link-dark px-2">Типы заявок</a></li>

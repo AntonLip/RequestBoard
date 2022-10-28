@@ -67,8 +67,6 @@ public class HomeController : Controller
         }
     }
 
-
-
     public IActionResult RemoveRequestType(Guid id)
     {
         try

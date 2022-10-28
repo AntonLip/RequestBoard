@@ -9,6 +9,7 @@ namespace RequestBoard.Models.DbModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string UserId { get; set; }
+        public Stages Stage {get;set;}
 
         [ForeignKey("RequestType")]
         public Guid RequestTypeId { get; set; }
